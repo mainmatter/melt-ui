@@ -58,3 +58,18 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
       - run: GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} && pnpm run pw
+      - run: pnpm run test
+
+  Gravity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.6.3
+          run_install: true
+      - run: pnpm install
+      - run: pnpm build
+      - run: pnpx @gravityci/cli 'dist/**/*'
+        env:
+          GRAVITY_TOKEN: ${{ secrets.GRAVITY_TOKEN }}
