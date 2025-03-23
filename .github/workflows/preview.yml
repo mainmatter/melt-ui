@@ -15,7 +15,7 @@
 
 name: Preview Deployment
 on:
-  pull_request_target:
+  pull_request:
     types: [opened, synchronize]
 
 # cancel in-progress runs on new commits to same PR (github.event.number)
@@ -33,7 +33,7 @@ permissions:
 
 jobs:
   trusted-preview:
-    if: ${{ github.event.pull_request.author_association == 'MEMBER' || github.event.pull_request.author_association == 'COLLABORATOR' || github.event.pull_request.author_association == 'OWNER' }}
+    if: ${{ github.repository == 'melt-ui/melt-ui' && (github.event.pull_request.author_association == 'MEMBER' || github.event.pull_request.author_association == 'COLLABORATOR' || github.event.pull_request.author_association == 'OWNER') }}
     runs-on: ubuntu-latest
     name: Deploy Preview to Cloudflare Pages (admin)
     steps:
@@ -79,7 +79,7 @@ jobs:
           deploymentName: Preview
 
   untrusted-preview:
-    if: ${{ !(github.event.pull_request.author_association == 'MEMBER' || github.event.pull_request.author_association == 'COLLABORATOR' || github.event.pull_request.author_association == 'OWNER') }}
+    if: ${{ github.repository == 'melt-ui/melt-ui' && !(github.event.pull_request.author_association == 'MEMBER' || github.event.pull_request.author_association == 'COLLABORATOR' || github.event.pull_request.author_association == 'OWNER') }}
     environment: Preview
     runs-on: ubuntu-latest
     name: Deploy Preview to Cloudflare Pages
