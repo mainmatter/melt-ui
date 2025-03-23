@@ -70,6 +70,7 @@ jobs:
           run_install: true
       - run: pnpm install
       - run: pnpm build
-      - run: pnpx @gravityci/cli 'dist/**/*'
+      - run: pnpm bundle
+      - run: pnpx @gravityci/cli 'dist/**/*' 'bundle.js'
         env:
           GRAVITY_TOKEN: ${{ secrets.GRAVITY_TOKEN }}
