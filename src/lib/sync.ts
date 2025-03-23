@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { effect } from '$lib/internal/helpers/index.js';
-import { dequal } from 'dequal';
+import deepEqual from 'deep-equal';
 import type { Writable } from 'svelte/store';
 
 type WritableValue<T> = T extends Writable<infer V> ? V : never;
@@ -39,7 +39,7 @@ export function createSync<Stores extends Record<string, Writable<unknown>>>(sto
 				...acc,
 				[key]: function sync(value: Value, setter?: (value: Value) => void) {
 					stores[key].update((p) => {
-						if (dequal(p, value)) return p;
+						if (deepEqual(p, value)) return p;
 						return value;
 					});
 					if (setter) {

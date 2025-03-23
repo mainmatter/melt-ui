@@ -1,5 +1,5 @@
 import type { ValueOf } from '$lib/internal/types.js';
-import { dequal } from 'dequal';
+import deepEqual from 'deep-equal';
 
 export function omit<T extends Record<string, unknown>, K extends keyof T>(
 	obj: T,
@@ -44,7 +44,7 @@ export function stripValues<T extends Record<string, unknown>, ToStrip>(
 	recursive: boolean
 ) {
 	return Object.fromEntries(
-		Object.entries(inputObject).filter(([_, value]) => !dequal(value, toStrip))
+		Object.entries(inputObject).filter(([_, value]) => !deepEqual(value, toStrip))
 	) as typeof recursive extends true ? StripValuesRecursive<T, ToStrip> : StripValues<T, ToStrip>;
 }
 

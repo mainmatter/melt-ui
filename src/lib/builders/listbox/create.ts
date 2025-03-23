@@ -40,7 +40,7 @@ import {
 	getElementById,
 } from '$lib/internal/helpers/index.js';
 import type { Defaults, MeltActionReturn } from '$lib/internal/types.js';
-import { dequal as deepEqual } from 'dequal';
+import deepEqual from 'deep-equal';
 import { tick } from 'svelte';
 import { derived, get, readonly, writable, type Readable } from 'svelte/store';
 import { generateIds } from '../../internal/helpers/id.js';
