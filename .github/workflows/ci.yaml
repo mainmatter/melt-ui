@@ -74,3 +74,4 @@ jobs:
       - run: pnpx @gravityci/cli 'dist/**/*' 'bundle.js'
         env:
           GRAVITY_TOKEN: ${{ secrets.GRAVITY_TOKEN }}
+          GRAVITY_HOST: ${{ vars.GRAVITY_HOST }}
