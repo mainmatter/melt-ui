@@ -1,4 +1,4 @@
-import { dequal as deepEqual } from 'dequal';
+import deepEqual from 'deep-equal';
 
 /**
  * Returns the element some number before the given index. If the target index is out of bounds:

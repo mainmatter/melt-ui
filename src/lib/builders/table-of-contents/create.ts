@@ -6,7 +6,7 @@ import {
 } from '$lib/internal/helpers/index.js';
 import type { Defaults } from '$lib/internal/types.js';
 
-import { dequal } from 'dequal';
+import deepEqual from 'deep-equal';
 import { derived, writable } from 'svelte/store';
 
 import { safeOnMount } from '$lib/internal/helpers/lifecycle.js';
@@ -317,7 +317,7 @@ export function createTableOfContents(args: CreateTableOfContentsArgs) {
 		const { headingsList: newHeadingsList, elementsList: newElementsList } =
 			generateInitialLists(newElementTarget);
 
-		if (dequal(headingsList, newHeadingsList)) return;
+		if (deepEqual(headingsList, newHeadingsList)) return;
 
 		// Update lists and LUs and re-run initialization.
 		headingsList = newHeadingsList;
